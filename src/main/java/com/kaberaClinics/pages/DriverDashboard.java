@@ -1,0 +1,112 @@
+package com.kaberaClinics.pages;
+
+import net.serenitybdd.core.pages.WebElementFacade;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import java.util.concurrent.TimeUnit;
+
+public class DriverDashboard extends ExtendedPageObject {
+
+    public void clickPanel(String arg1) throws InterruptedException {
+        waitForPageLoaded();
+        waitForPageLoaded();
+        Thread.sleep(2999);
+        String xpathExpression = "//span[text()='" + arg1 + "']";
+        returnTheVisibleOne(By.xpath(xpathExpression)).click();
+    }
+
+    public void clickPanel1(String arg1) throws InterruptedException {
+        waitForPageLoaded();
+        waitForPageLoaded();
+        Thread.sleep(2999);
+        String xpathExpression = "//li[text()='" + arg1 + "']";
+        returnTheVisibleOne(By.xpath(xpathExpression)).click();
+    }
+
+    public void clickOnSubLink(String arg1) throws InterruptedException {
+        waitForPageLoaded();
+        String xpathExpression = "//i[text()='"+arg1+"']";
+        returnTheVisibleOne(By.xpath(xpathExpression)).click();
+    }
+
+
+    public void sendValueByPlaceHolder(String placeHolder,String value)throws InterruptedException{
+        waitForPageLoaded();
+        String xpathExpression = "(//input[@placeholder='" + placeHolder + "'])";
+//        (//input[@placeholder="First Name"])[2]
+        int xpathCount = getDriver().findElements(By.xpath(xpathExpression)).size();
+        System.out.println("number of field found "+xpathCount);
+        if(xpathCount>1){
+            String xpathExpression1 = "(//input[@placeholder='" + placeHolder + "'])[2]";
+            returnTheVisibleOne(By.xpath(xpathExpression1)).sendKeys(value);
+            Thread.sleep(2000);
+        }
+        else {
+            returnTheVisibleOne(By.xpath(xpathExpression)).sendKeys(value);
+            Thread.sleep(2000);
+        }
+    }
+
+    public void clickOnTab(String arg1) throws InterruptedException {
+        waitForPageLoaded();
+        Thread.sleep(2999);
+        String xpathExpression = "//span[text()='" + arg1 + "']";
+        returnTheVisibleOne(By.xpath(xpathExpression)).click();
+
+    }
+    public void clickOnGivenDate(String arg1)throws InterruptedException{
+        waitForPageLoaded();
+        Thread.sleep(2999);
+        String xpathExpression = "//a[text()='" + arg1 + "']";
+        returnTheVisibleOne(By.xpath(xpathExpression)).click();
+    }
+
+    public void clickOnGivenSection(String section)throws InterruptedException{
+        withTimeoutOf(10, TimeUnit.SECONDS).waitForPresenceOf(net.serenitybdd.core.annotations.findby.By.xpath("//button//span[text()='Profile']"));
+        String xpathExpression="//button//span[text()='"+section+"']";
+        getDriver().findElement(By.xpath(xpathExpression)).click();
+    }
+
+    public boolean isGivenPageDisplayed(String pageName)throws InterruptedException{
+        waitForPageLoaded();
+        String xpathExpression="//*[text()='"+pageName+"']";
+        withTimeoutOf(10, TimeUnit.SECONDS).waitForPresenceOf(net.serenitybdd.core.annotations.findby.By.xpath(xpathExpression));
+        int len= getDriver().findElements(By.xpath(xpathExpression)).size();
+        if(len>0){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public String getPageTitle(String arg) {
+        withTimeoutOf(180, TimeUnit.SECONDS).waitForPresenceOf(net.serenitybdd.core.annotations.findby.By.xpath("//a[text()='"+arg+"']"));
+        WebElement page_title=getDriver().findElement(By.xpath("//a[text()='"+arg+"']"));
+        return page_title.getText();
+
+    }
+    @FindBy(xpath = "//button[@label='Profile']")
+    WebElementFacade profile_button;
+    @FindBy(xpath = "//button[@label='Trip History']")
+    WebElementFacade triphistory_button;
+    @FindBy(xpath = "//button[@label='My Vehicles']")
+    WebElementFacade myvehicles_button;
+    @FindBy(xpath = "//button[@label='Earnings']")
+    WebElementFacade earnings_button;
+
+    public boolean isDriverDashboardDisplayed() {
+
+        if ((profile_button.isDisplayed()) && (triphistory_button.isDisplayed()) && (myvehicles_button.isDisplayed()) && (earnings_button.isDisplayed())) {
+            return true;
+
+        } else {
+            return false;
+        }
+    }
+
+
+
+}

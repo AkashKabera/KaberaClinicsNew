@@ -1,0 +1,19 @@
+pipeline {
+  agent any
+ 
+  tools {nodejs "node"}
+  stages {
+    stage('Run Tests') {
+         steps {
+            sh "ls "
+            sh 'bash build-qa-grid.sh'
+         }
+        }
+    stage('Upload Results') {
+      steps {
+        sh 'npm install -g firebase-tools'  
+        sh 'firebase deploy --token 1/YcbK5UC0aro868WBubweKuZxmAgctv6Z6Fc9xx8DoOIf1x83KZm1U5gYBF2zGNLa'
+      }
+    }
+  }
+}

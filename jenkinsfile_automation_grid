@@ -1,0 +1,84 @@
+def REGISTRY='842678742443.dkr.ecr.us-east-1.amazonaws.com'
+def ENV='feature_selenium_grid'
+def BRANCH='develop'
+
+podTemplate(label: 'builder', containers: [
+  containerTemplate(name: 'maven', image: 'heerdev/selenium:6', ttyEnabled: true, command: 'cat'),
+  containerTemplate(name: 'docker', image: 'docker', ttyEnabled: true, command: 'cat')
+  ],
+  volumes: [
+  hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
+  ]) {
+
+  node('builder') {
+    try {
+        git branch: "${BRANCH}", credentialsId: 'operr-github', url: "git@github.com:CACSPC/${env.JOB_NAME}.git"
+        def GIT_COMMIT = sh(returnStdout: true, script: "git rev-parse HEAD").trim()
+
+    stage('Start Selenium Grid') {
+            container('docker') {
+                echo '==============================Start Selenium Grid in background======================================='
+                sh "docker stop selenium-operr  || true && docker rm selenium-operr  || true"
+                sh "docker run -d -p 8080:4444 --name selenium-operr selenium/standalone-chrome"
+                sh "docker ps"
+
+            }
+        }
+
+
+        stage('Run test in Chrome') {
+            container('maven') {
+                configFileProvider(
+                    [configFile(fileId: 'a50b64e2-1b79-43fc-b8a0-b16cc42b0e1e', variable: 'MAVEN_SETTINGS')]) {
+                        sh "curl http://127.0.0.1:8080/wd/hub"
+                         sh "ls -lh"
+                         sh "git clone -b develop https://e51846014a067cf33ece8b621529339e6947467d@github.com/CACSPC/operr-v3-cucumber"
+                         sh "cd operr-v3-cucumber"
+                         sh "ls "
+                         sh "cd operr-v3-cucumber"
+                         sh "pwd"
+                         sh "bash build-qa-grid.sh"
+                         sh "firebase deploy --token 1/YcbK5UC0aro868WBubweKuZxmAgctv6Z6Fc9xx8DoOIf1x83KZm1U5gYBF2zGNLa"
+                    }
+            }
+        }
+
+  stage('Stop Selenium Grid') {
+            container('docker') {
+                echo '==============================Start Selenium Grid in background======================================='
+                sh "docker stop selenium-operr  || true && docker rm selenium-operr  || true"
+                sh "docker ps"
+
+            }
+        }
+
+
+
+
+        notifySuccessful()
+    } catch (e) {
+        currentBuild.result = "FAILED"
+        notifyFailed()
+    }
+  }
+}
+
+def notifySuccessful() {
+  emailext (
+      to: 'qzhao@operr.com',
+      subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+      body: """<p>SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+        <p>Check console output at <a href='${env.BUILD_URL}/console'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""",
+      recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+    )
+}
+
+def notifyFailed() {
+  emailext (
+      to: 'qzhao@operr.com',
+      subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+      body: """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+        <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
+      recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+    )
+}

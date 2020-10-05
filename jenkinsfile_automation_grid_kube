@@ -1,0 +1,54 @@
+/**
+ * This pipeline executes Selenium tests against Chrome and Firefox, all running in the same Pod but in separate containers
+ * and in parallel
+ */
+
+def label = "maven-selenium-${UUID.randomUUID().toString()}"
+
+podTemplate(label: label, yaml: """
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: maven-chrome
+    image: heerdev/selenium:6
+    command: ['cat']
+    tty: true
+  - name: selenium-hub
+    image: selenium/hub
+  - name: selenium-chrome
+    image: selenium/node-chrome
+    env:
+    - name: HUB_PORT_4444_TCP_ADDR
+      value: localhost
+    - name: HUB_PORT_4444_TCP_PORT
+      value: 4444
+    - name: DISPLAY
+      value: :99.0
+    - name: SE_OPTS
+      value: -port 5556
+"""
+) {
+
+    node(label) {
+        stage('Checkout') {
+            git 'https://e51846014a067cf33ece8b621529339e6947467d@github.com/CACSPC/operr-v3-cucumber'
+            parallel (
+
+                    chrome: {
+                        container('maven-chrome') {
+                            stage('Test chrome') {
+                                sh "ls "
+                                sh 'bash build-qa-grid.sh'
+                                sh 'firebase deploy --token 1/YcbK5UC0aro868WBubweKuZxmAgctv6Z6Fc9xx8DoOIf1x83KZm1U5gYBF2zGNLa'
+                            }
+                        }
+                    }
+            )
+        }
+
+        stage('Logs') {
+            containerLog('selenium-chrome')
+        }
+    }
+}
