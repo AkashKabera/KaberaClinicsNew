@@ -24,6 +24,14 @@ public class LandingPage extends ExtendedPageObject {
 //            throw new InterruptedException("URL is null");
 //        }
         getDriver().get(url);
+        Thread.sleep(1999);
+        getDriver().manage().window().maximize();
+    }
+
+    public void closeChatBot() throws InterruptedException{
+        waitForPageLoaded();
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        js.executeAsyncScript("document.getElementsByClassName('og-chat-cross')[0].click()");
     }
 
     public void quitBrowser()  {

@@ -2,6 +2,7 @@ package com.kaberaClinics.pages;
 
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -9,12 +10,12 @@ import java.util.concurrent.TimeUnit;
 
 public class DriverDashboard extends ExtendedPageObject {
 
-    public void clickPanel(String arg1) throws InterruptedException {
+    public void clickOnGivenButton(String arg1) throws InterruptedException {
         waitForPageLoaded();
-        waitForPageLoaded();
-        Thread.sleep(2999);
-        String xpathExpression = "//span[text()='" + arg1 + "']";
-        returnTheVisibleOne(By.xpath(xpathExpression)).click();
+        String xpathExpression = "//button[text()='"+arg1+"']";
+        System.out.println(xpathExpression);
+        withTimeoutOf(10, TimeUnit.SECONDS).waitForPresenceOf(By.xpath(xpathExpression));
+        getDriver().findElement(By.xpath(xpathExpression)).click();
     }
 
     public void clickPanel1(String arg1) throws InterruptedException {
@@ -25,17 +26,32 @@ public class DriverDashboard extends ExtendedPageObject {
         returnTheVisibleOne(By.xpath(xpathExpression)).click();
     }
 
-    public void clickOnSubLink(String arg1) throws InterruptedException {
+    public void clickOnLink(String arg1) throws InterruptedException {
         waitForPageLoaded();
-        String xpathExpression = "//i[text()='"+arg1+"']";
-        returnTheVisibleOne(By.xpath(xpathExpression)).click();
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        String xpathExpression = "//a[text()='"+arg1+"']";
+        WebElement element = getDriver().findElement(By.xpath(xpathExpression));
+        if(element.isDisplayed()){
+            returnTheVisibleOne(By.xpath(xpathExpression)).click();
+        }
+        else {
+            js.executeScript("arguments[0].scrollIntoView();", element);
+            returnTheVisibleOne(By.xpath(xpathExpression)).click();
+        }
     }
 
 
     public void sendValueByPlaceHolder(String placeHolder,String value)throws InterruptedException{
         waitForPageLoaded();
         String xpathExpression = "(//input[@placeholder='" + placeHolder + "'])";
-//        (//input[@placeholder="First Name"])[2]
+        int xpathCount = getDriver().findElements(By.xpath(xpathExpression)).size();
+        System.out.println("number of field found "+xpathCount);
+            returnTheVisibleOne(By.xpath(xpathExpression)).sendKeys(value);
+            Thread.sleep(2000);
+    }
+    public void sendValueByPlaceHolder2(String placeHolder,String value)throws InterruptedException{
+        waitForPageLoaded();
+        String xpathExpression = "(//input[@placeholder='" + placeHolder + "'])";
         int xpathCount = getDriver().findElements(By.xpath(xpathExpression)).size();
         System.out.println("number of field found "+xpathCount);
         if(xpathCount>1){
@@ -47,6 +63,23 @@ public class DriverDashboard extends ExtendedPageObject {
             returnTheVisibleOne(By.xpath(xpathExpression)).sendKeys(value);
             Thread.sleep(2000);
         }
+    }
+
+    public void sendValueByPlaceHolder1(String placeHolder,String value)throws InterruptedException{
+        waitForPageLoaded();
+        String xpathExpression = "(//textarea[@placeholder='" + placeHolder + "'])";
+//        (//input[@placeholder="First Name"])[2]
+        int xpathCount = getDriver().findElements(By.xpath(xpathExpression)).size();
+        System.out.println("number of field found "+xpathCount);
+//        if(xpathCount>1){
+//            String xpathExpression1 = "(//textarea[@placeholder='" + placeHolder + "'])[2]";
+//            returnTheVisibleOne(By.xpath(xpathExpression1)).sendKeys(value);
+//            Thread.sleep(2000);
+//        }
+//        else {
+            returnTheVisibleOne(By.xpath(xpathExpression)).sendKeys(value);
+            Thread.sleep(2000);
+//        }
     }
 
     public void clickOnTab(String arg1) throws InterruptedException {
