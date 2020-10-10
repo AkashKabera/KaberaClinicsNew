@@ -23,6 +23,8 @@ public class LandingPage extends ExtendedPageObject {
 //        if (url == null) {
 //            throw new InterruptedException("URL is null");
 //        }
+//        getDriver().get(url);
+
         getDriver().get(url);
         Thread.sleep(1999);
         getDriver().manage().window().maximize();

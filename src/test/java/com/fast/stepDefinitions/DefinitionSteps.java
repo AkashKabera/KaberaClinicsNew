@@ -56,6 +56,11 @@ public class DefinitionSteps {
 	    steps.user_click_on_link(arg1);
     }
 
+    @Given("^user click on \"([^\"]*)\" head link$")
+    public void user_click_on_head_link(String arg1) throws Throwable{
+	    steps.user_click_on_head_link(arg1);
+    }
+
     @Then("^Verify that \"([^\"]*)\" page displayed$")
     public void verify_that_page_displayed(String arg1) throws Throwable{
 	    steps.verify_that_page_displayed(arg1);
@@ -100,6 +105,38 @@ public class DefinitionSteps {
     public void verify_that_offer_page_displayed(String arg1) throws Throwable{
 		steps.verify_that_offer_page_displayed(arg1);
     }
+
+    @Then("^Verify that \"([^\"]*)\" pillar page displayed$")
+    public void verify_that_pillar_page_displayed(String arg1) throws Throwable{
+	    steps.verify_that_pillar_page_displayed(arg1);
+    }
+
+	@Then("^Verify that after clicking on \"([^\"]*)\" icon in \"([^\"]*)\" navigates to \"([^\"]*)\" page$")
+	public void verify_that_after_clicking_on_icon_in_navigates_to_page(String linkName, String section, String pageName) throws Throwable{
+		steps.verify_that_after_clicking_on_icon_in_navigates_to_page(linkName,section,pageName);
+	}
+
+	@Given("^Enter an Email as following$")
+	public void enter_an_Email_as_following(DataTable arg1) throws Throwable{
+		steps.enter_an_Email_as_following(arg1);
+	}
+
+	@Then("^User Click on \"([^\"]*)\" button in footer$")
+	public void user_Click_on_button_in_footer(String arg1) throws Throwable{
+		steps.user_Click_on_button_in_footer(arg1);
+	}
+
+	@Then("^Verify that error message \"([^\"]*)\" displayed on keep up to date field$")
+	public void verify_that_error_message_displayed_on_keep_up_to_date_field(String arg1) throws Throwable{
+		steps.verify_that_error_message_displayed_on_keep_up_to_date_field(arg1);
+	}
+
+
+	@Then("^Enter an Invalid Email as following$")
+	public void enter_an_Invalid_Email_as_following(DataTable arg1) throws Throwable{
+		steps.enter_an_Invalid_Email_as_following(arg1);
+	}
+
 
 
 

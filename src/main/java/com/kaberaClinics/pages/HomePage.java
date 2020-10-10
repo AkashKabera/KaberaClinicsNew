@@ -92,7 +92,7 @@ public class HomePage extends ExtendedPageObject {
         return str;
         }
 
-        @FindBy(xpath = "//input[@placeholder='Enter Phone Number']")
+        @FindBy(xpath = "//input[@placeholder='Enter Phone Number' and @name='phoneNumber']")
         WebElementFacade phoneNumberField1;
         public void enterRandomPhoneNumber() throws InterruptedException{
         waitForPageLoaded();
@@ -127,6 +127,11 @@ public class HomePage extends ExtendedPageObject {
             String linkXpathExpression = "(//a[text()='"+linkName+"'])["+index+"]";
             getDriver().findElement(By.xpath(linkXpathExpression)).click();
             }
+
+        else if (linkName.equals("Mental Disorders") || linkName.equals("Diabetes Treatment") || linkName.equals("Blood Pressure")){
+            String xpathExpression1 = "(//a[text()='"+linkName+"'])[2]";
+            getDriver().findElement(org.openqa.selenium.By.xpath(xpathExpression1)).click();
+        }
         else {
             String linkXpathExpression = "(//a[text()='"+linkName+"'])["+index+"]";
             getDriver().findElement(By.xpath(linkXpathExpression)).click();
@@ -258,14 +263,107 @@ public class HomePage extends ExtendedPageObject {
         WebElement element = getDriver().findElement(By.xpath(xpathExpression));
         js.executeScript("arguments[0].scrollIntoView();", element);
         Thread.sleep(5999);
-        js.executeScript("window.scrollBy(0,-600)");
+        js.executeScript("window.scrollBy(0,-500)");
         Thread.sleep(5999);
         getDriver().findElement(By.xpath(xpathExpression)).click();
     }
 
-    public String isCategoryOfferPageDisplayed() throws InterruptedException{
+    public String isCategoryOfferPageDisplayed(String category) throws InterruptedException{
         waitForPageLoaded();
-        withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.xpath("//div[2]/div[1]/div/h2"));
-        return getDriver().findElement(By.xpath("//div[2]/div[1]/div/h2")).getText();
+        String xpathExpression = "//h2[contains(text(),'"+category+"')]";
+        withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.xpath("//div[4]/div[1]/div/h2"));
+        return getDriver().findElement(By.xpath("//div[4]/div[1]/div/h2")).getText();
+    }
+
+    public String getPillarPage(String categoryName) throws InterruptedException{
+        waitForPageLoaded();
+        String xpathExpression = "//h2[contains(text(),'"+categoryName+"')]";
+        withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.xpath(xpathExpression));
+        String header = getDriver().findElement(By.xpath(xpathExpression)).getText();
+        System.out.println("Header is" +header);
+        return header;
+    }
+
+    public String getSocialPage(String linkName , String section) throws InterruptedException{
+            String classExpression = ".fa.fa-"+linkName+"";
+            System.out.println("ClassName is" +classExpression);
+            int index = 0;
+
+            if (section.equals("Connect With Us") && linkName.equals("facebook")){
+                index = 1;
+                String xpathExpression = "//footer//div[3]/div[1]/ul/li["+index+"]/a";
+                String href =  getDriver().findElement(By.xpath(xpathExpression)).getAttribute("href");
+                System.out.println(href);
+                return href;
+
+            }
+            else if (section.equals("Connect With Us") && linkName.equals("twitter")){
+                index = 2;
+                String xpathExpression = "//footer//div[3]/div[1]/ul/li["+index+"]/a";
+                String href =  getDriver().findElement(By.xpath(xpathExpression)).getAttribute("href");
+                System.out.println(href);
+                return href;
+            }
+            else if (section.equals("Connect With Us") && linkName.equals("instagram")){
+                index = 3;
+                String xpathExpression = "//footer//div[3]/div[1]/ul/li["+index+"]/a";
+                String href =  getDriver().findElement(By.xpath(xpathExpression)).getAttribute("href");
+                System.out.println(href);
+                return href;
+            }
+            if (section.equals("header") && linkName.equals("facebook")){
+                index = 1;
+                String xpathExpression = "//div/div[3]/div/ul/li["+index+"]/a";
+                String href =  getDriver().findElement(By.xpath(xpathExpression)).getAttribute("href");
+                System.out.println(href);
+                return href;
+            }
+            else if (section.equals("header") && linkName.equals("twitter")){
+                index = 2;
+                String xpathExpression = "//footer//div[3]/div[1]/ul/li["+index+"]/a";
+                String href =  getDriver().findElement(By.xpath(xpathExpression)).getAttribute("href");
+                System.out.println(href);
+                return href;
+            }
+            else if (section.equals("header") && linkName.equals("instagram")){
+                index = 3;
+                String xpathExpression = "//footer//div[3]/div[1]/ul/li["+index+"]/a";
+                String href =  getDriver().findElement(By.xpath(xpathExpression)).getAttribute("href");
+                System.out.println(href);
+                return href;
+            }
+            else if (section.equals("Connect With Us") && linkName.equals("youtube")){
+                index = 4;
+                String xpathExpression = "//footer//div[3]/div[1]/ul/li["+index+"]/a";
+                String href =  getDriver().findElement(By.xpath(xpathExpression)).getAttribute("href");
+                System.out.println(href);
+                return href;
+            }
+            else {
+                return "href";
+            }
+    }
+
+    @FindBy(xpath = "(//input[@placeholder=\"Enter Email ID\"])[2]")
+    WebElement subscribeEmail;
+    public void enterRandomEmail() throws InterruptedException{
+            waitForPageLoaded();
+        int random =100+(int)(Math.random()*91);
+        String email = "Test_User" + random + "@gmail.com" ;
+        subscribeEmail.sendKeys(email);
+    }
+
+    public void enterRandomInvalidEmail() throws InterruptedException{
+            waitForPageLoaded();
+        int random =100+(int)(Math.random()*91);
+        String email = "Invalid_Test_User" + random  ;
+        subscribeEmail.sendKeys(email);
+    }
+
+    public String getErrorMessageOnFooter (String error) throws InterruptedException{
+        waitForPageLoaded();
+        String xpathExpression = "(//div[text()='"+error+"'])[2]";
+        String errMsg = getDriver().findElement(By.xpath(xpathExpression)).getText();
+        return errMsg;
     }
 }

@@ -58,12 +58,12 @@ Feature: Landing Page
 
   Scenario: Verify that Personalized Consultation link is working
     Given user is on home page
-    And user click on "Personalized Consultation" link
+    And user click on "Personalized Consultation" head link
     Then Verify that "consult" page displayed
 
   Scenario: Verify that Talk To Our Doctors link is working
     Given user is on home page
-    And user click on "Talk To Our Doctors" link
+    And user click on "Talk To Our Doctors" head link
     And Enter phone number
       | Phone Number | 10 Digits Random Number |
     And User Click on "Submit" button
@@ -71,12 +71,12 @@ Feature: Landing Page
 
   Scenario: Verify that Kabera Clinics Guidelines link is working
     Given user is on home page
-    And user click on "Kabera Clinics Guidelines" link
+    And user click on "Kabera Clinics Guidelines" head link
     Then Verify that "guidelines" page displayed
 
   Scenario: Verify that What We Do? link is working
     Given user is on home page
-    And user click on "What We Do?" link
+    And user click on "What We Do?" head link
     Then Verify that "how-homeopathy-works" page displayed
 
   Scenario: Verify that user is able to Share Your Problem With Us
@@ -215,3 +215,84 @@ Feature: Landing Page
     Then Verify that "offers" page displayed
     Then Verify that "Womens Health" offer page displayed
 
+  Scenario: Verify that user is able to read more about Mental Disorder
+    Given user is on home page
+    And User is on "Categories" section
+    Then user click on "Mental Disorders" link in "Categories" section
+    Then Verify that "Mental Disorder" pillar page displayed
+
+  Scenario: Verify that user is able to read more about Arthritis Treatment
+    Given user is on home page
+    And User is on "Categories" section
+    Then user click on "Arthritis treatment" link in "Categories" section
+    Then Verify that "Arthritis Treatment" pillar page displayed
+
+  Scenario: Verify that user is able to read more about Diabetes Treatment
+    Given user is on home page
+    And User is on "Categories" section
+    Then user click on "Diabetes Treatment" link in "Categories" section
+    Then Verify that "Diabetes Treatment" pillar page displayed
+
+  Scenario: Verify that user is able to read more about Blood Pressure
+    Given user is on home page
+    And User is on "Categories" section
+    Then user click on "Blood Pressure" link in "Categories" section
+    Then Verify that "Blood Pressure" pillar page displayed
+
+  Scenario: Verify that user is able to read more about Immune System
+    Given user is on home page
+    And User is on "Categories" section
+    Then user click on "Immune system" link in "Categories" section
+    Then Verify that "Immune System" pillar page displayed
+
+  Scenario: Verify that footer social links are working - Facebook
+    Given user is on home page
+    And User is on "CONNECT WITH US" section
+    Then Verify that after clicking on "facebook" icon in "Connect With Us" navigates to "facebook" page
+
+  Scenario: Verify that footer social links are working - Twitter
+    Given user is on home page
+    And User is on "CONNECT WITH US" section
+    Then Verify that after clicking on "twitter" icon in "Connect With Us" navigates to "twitter" page
+
+  Scenario: Verify that footer social links are working - Instagram
+    Given user is on home page
+    And User is on "CONNECT WITH US" section
+    Then Verify that after clicking on "instagram" icon in "Connect With Us" navigates to "instagram" page
+
+  Scenario: Verify that footer social links are working - Youtube
+    Given user is on home page
+    And User is on "CONNECT WITH US" section
+    Then Verify that after clicking on "facebook" icon in "Connect With Us" navigates to "facebook" page
+
+  Scenario: Verify that header social links are working - Facebook
+    Given user is on home page
+    Then Verify that after clicking on "facebook" icon in "header" navigates to "facebook" page
+
+  Scenario: Verify that header social links are working - Twitter
+    Given user is on home page
+    Then Verify that after clicking on "twitter" icon in "header" navigates to "twitter" page
+
+  Scenario: Verify that header social links are working - Instagram
+    Given user is on home page
+    Then Verify that after clicking on "instagram" icon in "header" navigates to "instagram" page
+
+  Scenario: Verify that user is able to Subscribe from Keep Up To Date Section in footer
+    Given user is on home page
+    And User is on "CONNECT WITH US" section
+    And User is on "KEEP UP TO DATE" section
+    And Enter an Email as following
+    | Email | Test_user + Random number + @gmail.com |
+    Then User Click on "Subscribe" button in footer
+    Then Verify that success message "Thank you" displayed
+
+  Scenario: Keep up to date - Field Validation
+    Given user is on home page
+    And User is on "CONNECT WITH US" section
+    And User is on "KEEP UP TO DATE" section
+    Then User Click on "Subscribe" button in footer
+    Then Verify that error message "Email is required" displayed on keep up to date field
+    And Enter an Invalid Email as following
+      | Email | invalidEmail + Random number |
+    Then User Click on "Subscribe" button in footer
+    Then Verify that error message "Please enter email valid email" displayed on keep up to date field

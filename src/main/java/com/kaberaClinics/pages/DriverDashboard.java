@@ -18,6 +18,14 @@ public class DriverDashboard extends ExtendedPageObject {
         getDriver().findElement(By.xpath(xpathExpression)).click();
     }
 
+    public void clickOnGivenButton1(String arg1) throws InterruptedException {
+        waitForPageLoaded();
+        String xpathExpression = "(//button[text()='"+arg1+"'])[2]";
+        System.out.println(xpathExpression);
+        withTimeoutOf(10, TimeUnit.SECONDS).waitForPresenceOf(By.xpath(xpathExpression));
+        getDriver().findElement(By.xpath(xpathExpression)).click();
+    }
+
     public void clickPanel1(String arg1) throws InterruptedException {
         waitForPageLoaded();
         waitForPageLoaded();
@@ -34,10 +42,46 @@ public class DriverDashboard extends ExtendedPageObject {
         if(element.isDisplayed()){
             returnTheVisibleOne(By.xpath(xpathExpression)).click();
         }
+
         else {
             js.executeScript("arguments[0].scrollIntoView();", element);
             returnTheVisibleOne(By.xpath(xpathExpression)).click();
         }
+    }
+
+    public void clickOnHeadLink(String arg1) throws InterruptedException {
+        waitForPageLoaded();
+
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        String xpath = "//div[@class='cnsult_box']";
+        WebElement element = getDriver().findElement(By.xpath(xpath));
+        int index = 0;
+        if(arg1.equals("Personalized Consultation")){
+            index = 1;
+        }
+
+        else if(arg1.equals("Talk To Our Doctors")){
+            index = 2;
+        }
+
+        else if(arg1.equals("Kabera Clinics Guidelines")){
+            index = 3;
+        }
+
+        else if(arg1.equals("What We Do?")){
+            index = 4;
+        }
+
+//        else {
+            js.executeScript("arguments[0].scrollIntoView();", element);
+        Thread.sleep(4999);
+//            returnTheVisibleOne(By.xpath(xpathExpression)).click();
+//        }
+        String xpathExpression = "(//div[@class='cnsult_box'])["+index+"]";
+        System.out.println(xpathExpression);
+//        String xpathExpression = "//div[4]/div[4]/div/div/div/div[1]/div/div["+index+"]/div/a";
+//        String xpathExpression = "//div[1]/div[4]/div[4]/div/div/div/div[1]/div/div[1]/div/a";
+        getDriver().findElement(By.xpath(xpathExpression)).click();
     }
 
 

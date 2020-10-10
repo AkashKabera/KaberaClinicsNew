@@ -68,6 +68,11 @@ public class EndUserSteps {
 	}
 
 	@Step
+	public void user_click_on_head_link(String arg1) throws Throwable{
+		driverDashboard.clickOnHeadLink(arg1);
+	}
+
+	@Step
 	public void verify_that_page_displayed(String arg1) throws Throwable{
 		Assert.assertTrue(extendedPageObject.getURL().contains(arg1));
 	}
@@ -131,7 +136,55 @@ public class EndUserSteps {
 
 	@Step
 	public void verify_that_offer_page_displayed(String arg1) throws Throwable{
-		Assert.assertTrue(homePage.isCategoryOfferPageDisplayed().contains(arg1));
+		Assert.assertTrue(homePage.isCategoryOfferPageDisplayed(arg1).contains(arg1));
 	}
 
+	@Step
+	public void verify_that_pillar_page_displayed(String arg1) throws Throwable{
+		Assert.assertTrue(homePage.getPillarPage(arg1).contains(arg1.toUpperCase()));
 	}
+
+	@Step
+	public void verify_that_after_clicking_on_icon_in_navigates_to_page(String linkName, String section, String pageName) throws Throwable{
+		if(linkName.equals("facebook")){
+			Assert.assertTrue(homePage.getSocialPage(linkName,section).contains("https://www.facebook.com/clinicskabera"));
+		}
+		else if(linkName.equals("twitter")){
+			Assert.assertTrue(homePage.getSocialPage(linkName,section).contains("https://twitter.com/kabera_clinics"));
+		}
+		else if(linkName.equals("instagram")){
+			Assert.assertTrue(homePage.getSocialPage(linkName,section).contains("https://www.instagram.com/kabera.clinics/"));
+		}
+		else if(linkName.equals("youtube")){
+			Assert.assertTrue(homePage.getSocialPage(linkName,section).contains("https://www.youtube.com/channel/UCYSag6-AV4NWc2GyYVICZAQ"));
+		}
+	}
+
+	@Step
+	public void enter_an_Email_as_following(DataTable arg1) throws Throwable{
+		homePage.enterRandomEmail();
+	}
+
+	@Step
+	public void user_Click_on_button_in_footer(String arg1) throws Throwable{
+		driverDashboard.clickOnGivenButton1(arg1);
+	}
+
+	@Step
+	public void verify_that_error_message_displayed_on_keep_up_to_date_field(String arg1) throws Throwable{
+		Assert.assertEquals(arg1,homePage.getErrorMessageOnFooter(arg1));
+	}
+
+	@Step
+	public void enter_an_Invalid_Email_as_following(DataTable arg1) throws Throwable{
+		homePage.enterRandomInvalidEmail();
+
+	}
+
+
+
+
+
+
+
+}
