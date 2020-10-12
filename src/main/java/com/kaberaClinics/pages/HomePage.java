@@ -40,14 +40,14 @@ public class HomePage extends ExtendedPageObject {
     WebElementFacade oneMonthButton;
     @FindBy(xpath = "//input[@placeholder='Enter 10 digit phone number']")
     WebElementFacade phoneNumberField;
-    @FindBy(xpath = "(//input[@name='name'])[3]")
+    @FindBy(xpath = "(//input[@name='name'])[4]")
     WebElementFacade patientNameField;
     @FindBy(xpath = "//li[text()='Skin Infection']")
     WebElementFacade skinInfection;
     public void fillTheQuestionnaire(String buttonText, String buttonText1, String buttonText2)throws InterruptedException{
         withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.xpath("//h5[@class='ques']"));
         String xpathExpression = "//a[text()='"+buttonText+"']";
-        String xpathExpression1 = "(//button[text()='"+buttonText1+"'])[2]";
+        String xpathExpression1 = "(//button[text()='"+buttonText1+"'])[4]";
         Random rand = new Random();
         char randomString = (char) (rand.nextInt(26) + 'a');
         String name = "test" + randomString + randomString;
@@ -57,6 +57,7 @@ public class HomePage extends ExtendedPageObject {
         oneMonthButton.click();
         withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.xpath(xpathExpression1));
         getDriver().findElement(By.xpath(xpathExpression1)).click();
+//        getDriver().findElement(By.xpath("(//button[text()='Next'])[4]")).click();
         waitForTextToAppear("Do You Have More Symptoms?");
         withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.xpath(xpathExpression));
         getDriver().findElement(By.xpath(xpathExpression)).click();
@@ -256,10 +257,38 @@ public class HomePage extends ExtendedPageObject {
             }
         }
 
+        public void clickOnBlog(String linkName, String section) throws InterruptedException{
+            waitForPageLoaded();
+            int index = 1;
+            if (section.equals("5 Ways To Live Like Lord Buddha In The Corona Age")){
+                index = 2;
+            }
+            String xpathExpression = "(//a[text()='"+linkName+"'])["+index+"]";
+            System.out.println(xpathExpression);
+            getDriver().findElement(By.xpath(xpathExpression)).click();
+        }
+
+        @FindBy(xpath = "//*[@id='newsletter-popup']/button")
+        WebElement closeSubscribePopupIcon;
+    public String getBlogHead(String blogHead) throws InterruptedException{
+            waitForPageLoaded();
+            waitForPageLoaded();
+            JavascriptExecutor js = (JavascriptExecutor) getDriver();
+            String xpathExpression = "(//a[text()='"+blogHead+"'])[4]";
+            if(closeSubscribePopupIcon.isDisplayed()){
+                closeSubscribePopupIcon.click();
+            }
+        WebElement element = getDriver().findElement(By.xpath(xpathExpression));
+        js.executeScript("arguments[0].scrollIntoView();", element);
+        withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.xpath(xpathExpression));
+        String head = getDriver().findElement(By.xpath(xpathExpression)).getText();
+            return head;
+    }
+
     public void clickOnCategory(String categoryName) throws InterruptedException{
         waitForPageLoaded();
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
-        String xpathExpression = "//a[text()='"+categoryName+"']" ;
+        String xpathExpression = "//a[text()=\""+categoryName+"\"]" ;
         WebElement element = getDriver().findElement(By.xpath(xpathExpression));
         js.executeScript("arguments[0].scrollIntoView();", element);
         Thread.sleep(5999);
@@ -270,7 +299,6 @@ public class HomePage extends ExtendedPageObject {
 
     public String isCategoryOfferPageDisplayed(String category) throws InterruptedException{
         waitForPageLoaded();
-        String xpathExpression = "//h2[contains(text(),'"+category+"')]";
         withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.xpath("//div[4]/div[1]/div/h2"));
         return getDriver().findElement(By.xpath("//div[4]/div[1]/div/h2")).getText();
     }

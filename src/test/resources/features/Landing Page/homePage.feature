@@ -128,7 +128,15 @@ Feature: Landing Page
     Given user is on home page
     And User is on "Read Our Top Articles" section
     Then Verify that after clicking on "SEE ALL" button in "Read Our Top Articles" navigates to blog page
+
+  Scenario: Verify that blog page is displayed after clicking on Read More button in How Mindfulness Will Help You Battle Anything section
+    Given user is on home page
+    And User is on "Read Our Top Articles" section
     Then Verify that after clicking on "READ MORE" button in "How Mindfulness Will Help You Battle Anything" navigates to blog page
+
+  Scenario: Verify that blog page is displayed after clicking on Read More button in 5 Ways To Live Like Lord Buddha In The Corona Age section
+    Given user is on home page
+    And User is on "Read Our Top Articles" section
     Then Verify that after clicking on "READ MORE" button in "5 Ways To Live Like Lord Buddha In The Corona Age" navigates to blog page
 
   Scenario: Verify that user is able to book consultation form Book Now button in Skip the Travel section
@@ -211,9 +219,9 @@ Feature: Landing Page
 
   Scenario: Verify that offers are displayed for Womens Health
     Given user is on home page
-    And  User click on "Womens Health" category
+    And  User click on "Women's Health" category
     Then Verify that "offers" page displayed
-    Then Verify that "Womens Health" offer page displayed
+    Then Verify that "Women's Health" offer page displayed
 
   Scenario: Verify that user is able to read more about Mental Disorder
     Given user is on home page

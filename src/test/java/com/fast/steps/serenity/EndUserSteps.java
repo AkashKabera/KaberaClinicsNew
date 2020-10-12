@@ -122,10 +122,19 @@ public class EndUserSteps {
 	public void verify_that_after_clicking_on_button_in_navigates_to_blog_page(String arg1, String arg2) throws Throwable {
 		if (arg2.equals("Read Our Top Articles")) {
 			Assert.assertEquals("https://blog.kaberaclinics.com/", homePage.isBlogPageDisplayed(arg1, arg2));
-		} else if (arg2.equals("How Mindfulness Will Help You Battle Anything")) {
+		}
+		else if (arg2.equals("How Mindfulness Will Help You Battle Anything")) {
 			Assert.assertEquals("https://blog.kaberaclinics.com/3-tips-on-how-mindfulness-can-help-you-battle-anything/", homePage.isBlogPageDisplayed(arg1, arg2));
-		} else if (arg2.equals("5 Ways To Live Like Lord Buddha In The Corona Age")) {
+			homePage.clickOnBlog(arg1,arg2);
+			String blogName = "How Mindfulness Will Help You Battle Anything";
+			Assert.assertEquals(blogName, homePage.getBlogHead(blogName));
+		}
+		else if (arg2.equals("5 Ways To Live Like Lord Buddha In The Corona Age")) {
 			Assert.assertEquals("https://blog.kaberaclinics.com/5-ways-to-live-like-lord-buddha-in-the-corona-age/", homePage.isBlogPageDisplayed(arg1, arg2));
+			homePage.clickOnBlog(arg1,arg2);
+			String blogName = "5 Ways to Live Like Lord Buddha in the Corona Age";
+			Assert.assertEquals(blogName, homePage.getBlogHead(blogName));
+
 		}
 	}
 
