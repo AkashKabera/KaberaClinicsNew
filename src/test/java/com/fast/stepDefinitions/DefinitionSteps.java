@@ -137,6 +137,11 @@ public class DefinitionSteps {
 		steps.enter_an_Invalid_Email_as_following(arg1);
 	}
 
+    @Given("^User select \"([^\"]*)\" package from \"([^\"]*)\" section$")
+    public void user_select_package_from_section(String arg1, String arg2) throws Throwable{
+		steps.user_select_package_from_section(arg1,arg2);
+	}
+
 
 
 

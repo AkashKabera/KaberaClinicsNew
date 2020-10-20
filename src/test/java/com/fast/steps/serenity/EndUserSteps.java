@@ -17,6 +17,7 @@ public class EndUserSteps {
 	DriverDashboard driverDashboard;
 	HomePage homePage;
 	ExtendedPageObject extendedPageObject;
+	GuidelinesPage guidelinesPage;
 
 	@Step
 	public void user_is_on_home_page() throws Throwable{
@@ -124,7 +125,7 @@ public class EndUserSteps {
 			Assert.assertEquals("https://blog.kaberaclinics.com/", homePage.isBlogPageDisplayed(arg1, arg2));
 		}
 		else if (arg2.equals("How Mindfulness Will Help You Battle Anything")) {
-			Assert.assertEquals("https://blog.kaberaclinics.com/3-tips-on-how-mindfulness-can-help-you-battle-anything/", homePage.isBlogPageDisplayed(arg1, arg2));
+			Assert.assertEquals("https://blog.kaberaclinics.com/how-mindfulness-will-help-you-battle-anything/", homePage.isBlogPageDisplayed(arg1, arg2));
 			homePage.clickOnBlog(arg1,arg2);
 			String blogName = "How Mindfulness Will Help You Battle Anything";
 			Assert.assertEquals(blogName, homePage.getBlogHead(blogName));
@@ -134,9 +135,32 @@ public class EndUserSteps {
 			homePage.clickOnBlog(arg1,arg2);
 			String blogName = "5 Ways to Live Like Lord Buddha in the Corona Age";
 			Assert.assertEquals(blogName, homePage.getBlogHead(blogName));
-
 		}
-	}
+		else if (arg2.equals("Why do you need a health checkup?")) {
+			guidelinesPage.clickOnReadNowLink(arg2);
+			Assert.assertEquals("https://blog.kaberaclinics.com/why-do-you-need-a-health-check-up/", extendedPageObject.getURL());
+			String blogName = "Why Do You Need a Health Check-Up?";
+			Assert.assertEquals(blogName,guidelinesPage.getBlogHead(blogName));
+		}
+		else if (arg2.equals("What should an online health check do for you?")) {
+			guidelinesPage.clickOnReadNowLink(arg2);
+			Assert.assertEquals("https://blog.kaberaclinics.com/what-should-an-online-health-check-up-do-for-you/", extendedPageObject.getURL());
+			String blogName = "What should an Online Health check-up do for you?";
+			Assert.assertEquals(blogName,guidelinesPage.getBlogHead(blogName));
+		}
+		else if (arg2.equals("Why us for a health care?")) {
+			guidelinesPage.clickOnReadNowLink(arg2);
+			Assert.assertEquals("https://blog.kaberaclinics.com/why-kabera-clinics-for-health-care/", extendedPageObject.getURL());
+			String blogName = "Why Kabera Clinics for health care?";
+			Assert.assertEquals(blogName,guidelinesPage.getBlogHead(blogName));
+		}
+		else if (arg2.equals("Purpose of online health consultation?")) {
+			guidelinesPage.clickOnReadNowLink(arg2);
+			Assert.assertEquals("https://blog.kaberaclinics.com/what-is-the-purpose-of-online-health-care/", extendedPageObject.getURL());
+			String blogName = "What is the purpose of Online Health Care?";
+			Assert.assertEquals(blogName,guidelinesPage.getBlogHead(blogName));
+		}
+}
 
 	@Step
 	public void user_click_on_category(String arg1) throws Throwable{
@@ -189,6 +213,12 @@ public class EndUserSteps {
 		homePage.enterRandomInvalidEmail();
 
 	}
+
+	@Step
+	public void user_select_package_from_section(String arg1, String arg2)throws Throwable {
+		guidelinesPage.selectPackage(arg1);
+	}
+
 
 
 

@@ -133,6 +133,13 @@ public class HomePage extends ExtendedPageObject {
             String xpathExpression1 = "(//a[text()='"+linkName+"'])[2]";
             getDriver().findElement(org.openqa.selenium.By.xpath(xpathExpression1)).click();
         }
+        else if (linkName.equals("Get Consultation online ")){
+            String xpathExpression1 = "//a[text()='"+linkName+"']";
+            WebElement element = getDriver().findElement(By.xpath("//h5[text()='Get Upto 10% Instant Discounts On Packs']"));
+            js.executeScript("arguments[0].scrollIntoView();", element);
+            Thread.sleep(1999);
+            getDriver().findElement(org.openqa.selenium.By.xpath(xpathExpression1)).click();
+        }
         else {
             String linkXpathExpression = "(//a[text()='"+linkName+"'])["+index+"]";
             getDriver().findElement(By.xpath(linkXpathExpression)).click();
@@ -262,22 +269,25 @@ public class HomePage extends ExtendedPageObject {
             int index = 1;
             if (section.equals("5 Ways To Live Like Lord Buddha In The Corona Age")){
                 index = 2;
+                String xpathExpression = "(//a[text()='"+linkName+"'])["+index+"]";
+                System.out.println(xpathExpression);
+                getDriver().findElement(By.xpath(xpathExpression)).click();
             }
-            String xpathExpression = "(//a[text()='"+linkName+"'])["+index+"]";
-            System.out.println(xpathExpression);
-            getDriver().findElement(By.xpath(xpathExpression)).click();
+            else {
+                String xpathExpression = "(//a[text()='"+linkName+"'])["+index+"]";
+                System.out.println(xpathExpression);
+                getDriver().findElement(By.xpath(xpathExpression)).click();
+
+            }
+
         }
 
-        @FindBy(xpath = "//*[@id='newsletter-popup']/button")
-        WebElement closeSubscribePopupIcon;
     public String getBlogHead(String blogHead) throws InterruptedException{
             waitForPageLoaded();
             waitForPageLoaded();
+            int index= 1;
             JavascriptExecutor js = (JavascriptExecutor) getDriver();
-            String xpathExpression = "(//a[text()='"+blogHead+"'])[4]";
-            if(closeSubscribePopupIcon.isDisplayed()){
-                closeSubscribePopupIcon.click();
-            }
+        String xpathExpression = "(//a[text()='"+blogHead+"'])["+index+"]";
         WebElement element = getDriver().findElement(By.xpath(xpathExpression));
         js.executeScript("arguments[0].scrollIntoView();", element);
         withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.xpath(xpathExpression));
