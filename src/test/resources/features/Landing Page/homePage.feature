@@ -15,7 +15,7 @@ Feature: Landing Page
     | You Seem To Have The Symptoms Of Fever        | Yes                    |
     | How Long You Have Been Suffering?             | Less then 1 month      |
     | Do You Have More Symptoms?                    | Yes                    |
-    | Type Your Symptoms And Add It To Your Chart?. | Skin Infection         |
+    | Type Your Symptoms And Add It To Your Chart?. | Pain                   |
     | Do You Want A Doctor To Call You?             | Yes                    |
     | Tell Us Your Phone Number.                    | 10 digit random number |
     | How About Your Name?                          | test + random string   |
@@ -55,6 +55,7 @@ Feature: Landing Page
     Given user is on home page
     And user click on "EXPLORE NOW" link in "how homeopathy works" section
     Then Verify that "how-homeopathy-works" page displayed
+    And Verify that user is on "How Homeopathy Works" page
 
   Scenario: Verify that Personalized Consultation link is working
     Given user is on home page
@@ -73,11 +74,13 @@ Feature: Landing Page
     Given user is on home page
     And user click on "Kabera Clinics Guidelines" head link
     Then Verify that "guidelines" page displayed
+    And Verify that user is on "Guideline" page
 
   Scenario: Verify that What We Do? link is working
     Given user is on home page
     And user click on "What We Do?" head link
     Then Verify that "how-homeopathy-works" page displayed
+    And Verify that user is on "How Homeopathy Works" page
 
   Scenario: Verify that user is able to Share Your Problem With Us
     Given user is on home page
@@ -163,65 +166,59 @@ Feature: Landing Page
     And User Click on "CONSULT NOW" button
     Then Verify that "consult" page displayed
 
-  Scenario: Verify that offers are displayed for Arthritis Treatment
+    ## Categories section
+
+  Scenario: Verify that pillar page is displayed for Arthritis Treatment
     Given user is on home page
     And  User click on "Arthritis Treatment " category
-    Then Verify that "offers" page displayed
-    Then Verify that "Arthritis Treatment" offer page displayed
+    Then Verify that "Arthritis Treatment" pillar page displayed
 
-  Scenario: Verify that offers are displayed for Diabetes Treatment
+  Scenario: Verify that pillar page is displayed for Diabetes Treatment
     Given user is on home page
     And  User click on "Diabetes Treatment" category
-    Then Verify that "offers" page displayed
-    Then Verify that "Diabetes Treatment" offer page displayed
+    Then Verify that "Diabetes Treatment" pillar page displayed
 
-  Scenario: Verify that offers are displayed for Hair Problem
+  Scenario: Verify that pillar page is displayed for Hair Problem
     Given user is on home page
     And  User click on "Hair Problem" category
-    Then Verify that "offers" page displayed
-    Then Verify that "Hair Problem" offer page displayed
+    Then Verify that "Hair Problems Solutions" pillar page displayed
 
-  Scenario: Verify that offers are displayed for Immune System
+  Scenario: Verify that pillar page is displayed for Immune System
     Given user is on home page
     And  User click on "Immune System" category
-    Then Verify that "offers" page displayed
-    Then Verify that "Immune System" offer page displayed
+    Then Verify that "Immune System" pillar page displayed
 
-  Scenario: Verify that offers are displayed for Migraine Headache
+  Scenario: Verify that pillar page is displayed for Migraine Headache
     Given user is on home page
     And  User click on "Migraine Headache" category
-    Then Verify that "offers" page displayed
-    Then Verify that "Migraine Headache" offer page displayed
+    Then Verify that "Migraine Headache" pillar page displayed
 
-  Scenario: Verify that offers are displayed for Skin Diseases
+  Scenario: Verify that pillar page is displayed for Skin Diseases
     Given user is on home page
     And  User click on "Skin Diseases" category
-    Then Verify that "offers" page displayed
-    Then Verify that "Skin Diseases" offer page displayed
+    Then Verify that "Skin Diseases" pillar page displayed
 
-  Scenario: Verify that offers are displayed for Blood Pressure
+  Scenario: Verify that pillar page is displayed for Blood Pressure
     Given user is on home page
     And  User click on "Blood Pressure" category
-    Then Verify that "offers" page displayed
-    Then Verify that "Blood Pressure" offer page displayed
+    Then Verify that "Blood Pressure" pillar page displayed
 
-  Scenario: Verify that offers are displayed for Child Care
+  Scenario: Verify that pillar page is displayed for Child Care
     Given user is on home page
     And  User click on "Child Care" category
-    Then Verify that "offers" page displayed
-    Then Verify that "Child Care" offer page displayed
+    Then Verify that "Child Health" pillar page displayed
 
-  Scenario: Verify that offers are displayed for Mental Disorders
+  Scenario: Verify that pillar page is displayed for Mental Disorders
     Given user is on home page
     And  User click on "Mental Disorders" category
-    Then Verify that "offers" page displayed
-    Then Verify that "Mental Disorders" offer page displayed
+    Then Verify that "Mental Disorder" pillar page displayed
 
-  Scenario: Verify that offers are displayed for Womens Health
+  Scenario: Verify that pillar page is displayed for Women's Health
     Given user is on home page
     And  User click on "Women's Health" category
-    Then Verify that "offers" page displayed
-    Then Verify that "Women's Health" offer page displayed
+    Then Verify that "Women's Health" pillar page displayed
+
+    ## Pillar Pages from footer
 
   Scenario: Verify that user is able to read more about Mental Disorder
     Given user is on home page
@@ -252,6 +249,38 @@ Feature: Landing Page
     And User is on "Categories" section
     Then user click on "Immune system" link in "Categories" section
     Then Verify that "Immune System" pillar page displayed
+
+  Scenario: Verify that user is able to read more about Migraine Headache
+    Given user is on home page
+    And User is on "Categories" section
+    Then user click on "Migraine Headache" link in "Categories" section
+    Then Verify that "Migraine Headache" pillar page displayed
+
+  Scenario: Verify that user is able to read more about Women Health
+    Given user is on home page
+    And User is on "Categories" section
+    Then user click on "Women Health" link in "Categories" section
+    Then Verify that "Women's Health" pillar page displayed
+
+  Scenario: Verify that user is able to read more about Child Care
+    Given user is on home page
+    And User is on "Categories" section
+    Then user click on "Child Care" link in "Categories" section
+    Then Verify that "Child Health" pillar page displayed
+
+  Scenario: Verify that user is able to read more about Skin Diseases
+    Given user is on home page
+    And User is on "Categories" section
+    Then user click on "Skin Diseases" link in "Categories" section
+    Then Verify that "Skin Diseases" pillar page displayed
+
+  Scenario: Verify that user is able to read more about Hair problems
+    Given user is on home page
+    And User is on "Categories" section
+    Then user click on "Hair problems" link in "Categories" section
+    Then Verify that "Hair Problems Solutions" pillar page displayed
+
+    ## Social Links from footer and header
 
   Scenario: Verify that footer social links are working - Facebook
     Given user is on home page
@@ -284,6 +313,8 @@ Feature: Landing Page
   Scenario: Verify that header social links are working - Instagram
     Given user is on home page
     Then Verify that after clicking on "instagram" icon in "header" navigates to "instagram" page
+
+    ## Subscribe
 
   Scenario: Verify that user is able to Subscribe from Keep Up To Date Section in footer
     Given user is on home page

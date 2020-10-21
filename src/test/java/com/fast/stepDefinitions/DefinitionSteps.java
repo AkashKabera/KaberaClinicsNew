@@ -142,6 +142,18 @@ public class DefinitionSteps {
 		steps.user_select_package_from_section(arg1,arg2);
 	}
 
+    @Given("^Verify that user is on \"([^\"]*)\" page$")
+    public void verify_that_user_is_on_page(String arg1) throws Throwable{
+	    steps.verify_that_user_is_on_page(arg1);
+    }
+
+	@Given("^user click on \"([^\"]*)\" link in \"([^\"]*)\" section on homeopathy page$")
+	public void user_click_on_link_in_section_on_homeopathy_page(String arg1, String arg2) throws Throwable{
+		steps.user_click_on_link_in_section_on_homeopathy_page(arg1,arg2);
+	}
+
+
+
 
 
 

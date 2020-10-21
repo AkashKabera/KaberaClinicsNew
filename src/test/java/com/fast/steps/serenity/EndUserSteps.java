@@ -18,6 +18,7 @@ public class EndUserSteps {
 	HomePage homePage;
 	ExtendedPageObject extendedPageObject;
 	GuidelinesPage guidelinesPage;
+	HomeopathyPage homeopathyPage;
 
 	@Step
 	public void user_is_on_home_page() throws Throwable{
@@ -40,7 +41,8 @@ public class EndUserSteps {
 		String btn="Yes";
 		String btn1="Next";
 		String btn2="Ok";
-		homePage.fillTheQuestionnaire(btn,btn1,btn2);
+		String symptom = data.get(3).get(1);
+		homePage.fillTheQuestionnaire(btn,btn1,btn2,symptom);
 	}
 
 	@Step
@@ -174,7 +176,13 @@ public class EndUserSteps {
 
 	@Step
 	public void verify_that_pillar_page_displayed(String arg1) throws Throwable{
-		Assert.assertTrue(homePage.getPillarPage(arg1).contains(arg1.toUpperCase()));
+		if(arg1.equals("Migraine Headache") || arg1.equals("Women's Health")){
+			String head = "Introduction";
+			Assert.assertTrue(homePage.getPillarPage(head).contains(head.toUpperCase()));
+		}
+		else {
+			Assert.assertTrue(homePage.getPillarPage(arg1).contains(arg1.toUpperCase()));
+		}
 	}
 
 	@Step
@@ -218,6 +226,18 @@ public class EndUserSteps {
 	public void user_select_package_from_section(String arg1, String arg2)throws Throwable {
 		guidelinesPage.selectPackage(arg1);
 	}
+
+	@Step
+	public void verify_that_user_is_on_page(String arg1) throws Throwable{
+		Assert.assertEquals(arg1,homeopathyPage.getPageHead(arg1));
+	}
+
+	@Step
+	public void user_click_on_link_in_section_on_homeopathy_page(String arg1, String arg2) throws Throwable{
+		homeopathyPage.clickOnGivenButton(arg1,arg2);
+	}
+
+
 
 
 

@@ -17,22 +17,19 @@ public class HomePage extends ExtendedPageObject {
     WebElementFacade needTreatmentField;
     @FindBy(xpath = "//input[@placeholder='I am from']")
     WebElementFacade locationField;
-    @FindBy(xpath = "//div/div[2]/div[1]/div/div[2]/ul/li[1]")
+//    @FindBy(xpath = "//div/div[2]/div[1]/div/div[2]/ul/li[1]")
+    @FindBy(xpath = "//li[contains(text(),'Fever')]")
     WebElementFacade symptomsDropdown;
 
     public void enterLocationAndSymptom(String symptom)throws InterruptedException{
         waitForPageLoaded();
         withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.xpath("//input[@placeholder='I need treatment for ']"));
-        locationField.clear();
-        Thread.sleep(999);
-        locationField.sendKeys("Mohali");
-        waitForPageLoaded();
         needTreatmentField.sendKeys(symptom);
         waitForPageLoaded();
         }
     public void selectASymptomFromDropdown()throws InterruptedException{
         waitForPageLoaded();
-        withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.xpath("//div/div[2]/div[1]/div/div[2]/ul/li[1]"));
+        withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.xpath("//li[contains(text(),'Fever')]"));
         symptomsDropdown.click();
     }
 
@@ -42,29 +39,31 @@ public class HomePage extends ExtendedPageObject {
     WebElementFacade phoneNumberField;
     @FindBy(xpath = "(//input[@name='name'])[4]")
     WebElementFacade patientNameField;
-    @FindBy(xpath = "//li[text()='Skin Infection']")
+    @FindBy(xpath = "//li[contains(text(),'Skin')]")
     WebElementFacade skinInfection;
-    public void fillTheQuestionnaire(String buttonText, String buttonText1, String buttonText2)throws InterruptedException{
+    public void fillTheQuestionnaire(String buttonText, String buttonText1, String buttonText2, String symptom)throws InterruptedException{
         withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.xpath("//h5[@class='ques']"));
         String xpathExpression = "//a[text()='"+buttonText+"']";
         String xpathExpression1 = "(//button[text()='"+buttonText1+"'])[4]";
         Random rand = new Random();
         char randomString = (char) (rand.nextInt(26) + 'a');
         String name = "test" + randomString + randomString;
+        Thread.sleep(2999);
         withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.xpath(xpathExpression));
         getDriver().findElement(By.xpath(xpathExpression)).click();
         withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.id("firstmonth"));
+        Thread.sleep(2999);
         oneMonthButton.click();
         withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.xpath(xpathExpression1));
         getDriver().findElement(By.xpath(xpathExpression1)).click();
-//        getDriver().findElement(By.xpath("(//button[text()='Next'])[4]")).click();
         waitForTextToAppear("Do You Have More Symptoms?");
         withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.xpath(xpathExpression));
         getDriver().findElement(By.xpath(xpathExpression)).click();
         withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.xpath(xpathExpression1));
-        driverDashboard.sendValueByPlaceHolder("Search here..." , "Skin Infection");
-        withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.xpath("//li[text()='Skin Infection']"));
-        skinInfection.click();
+        driverDashboard.sendValueByPlaceHolder("Search here..." , symptom);
+        String symptomXpath = "//li[contains(text(),'"+symptom+"')]";
+        withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.xpath(symptomXpath));
+        getDriver().findElement(By.xpath(symptomXpath)).click();
         waitForPageLoaded();
         getDriver().findElement(By.xpath(xpathExpression1)).click();
         withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.xpath(xpathExpression));
@@ -129,7 +128,7 @@ public class HomePage extends ExtendedPageObject {
             getDriver().findElement(By.xpath(linkXpathExpression)).click();
             }
 
-        else if (linkName.equals("Mental Disorders") || linkName.equals("Diabetes Treatment") || linkName.equals("Blood Pressure")){
+        else if (linkName.equals("Mental Disorders") || linkName.equals("Diabetes Treatment") || linkName.equals("Blood Pressure") || linkName.equals("Migraine Headache") || linkName.equals("Child Care") || linkName.equals("Skin Diseases")){
             String xpathExpression1 = "(//a[text()='"+linkName+"'])[2]";
             getDriver().findElement(org.openqa.selenium.By.xpath(xpathExpression1)).click();
         }
@@ -218,7 +217,8 @@ public class HomePage extends ExtendedPageObject {
             Thread.sleep(999);
             firstNextButton.click();
             withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.id("sec_input1"));
-            waitForTextToAppear("From How Long You Have Been Suffering From This?");
+//            waitForTextToAppear("From How Long You Have Been Suffering From This?");
+            Thread.sleep(2999);
             lessThanOneMonthBtn.click();
             Thread.sleep(999);
             secondNextButton.click();
