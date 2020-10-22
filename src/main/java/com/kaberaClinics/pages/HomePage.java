@@ -41,7 +41,7 @@ public class HomePage extends ExtendedPageObject {
     WebElementFacade patientNameField;
     @FindBy(xpath = "//li[contains(text(),'Skin')]")
     WebElementFacade skinInfection;
-    public void fillTheQuestionnaire(String buttonText, String buttonText1, String buttonText2, String symptom)throws InterruptedException{
+    public void fillTheQuestionnaireForYesButton(String buttonText, String buttonText1, String buttonText2, String symptom)throws InterruptedException{
         withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.xpath("//h5[@class='ques']"));
         String xpathExpression = "//a[text()='"+buttonText+"']";
         String xpathExpression1 = "(//button[text()='"+buttonText1+"'])[4]";
@@ -83,8 +83,43 @@ public class HomePage extends ExtendedPageObject {
         getDriver().findElement(By.xpath(xpath1)).click();
         }
 
+        @FindBy(xpath = "(//textarea[@name='aboutSymptoms'])[2]")
+        WebElement tellUsSymptoms;
+    public void fillTheQuestionnaireForNoButton(String buttonText, String linkText, String buttonText2, String symptom)throws InterruptedException{
+        withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.xpath("//h5[@class='ques']"));
+        String xpathExpression = "//a[text()='"+buttonText+"']";
+        String xpathExpression2 = "//a[text()='"+linkText+"']";
+        Random rand = new Random();
+        char randomString = (char) (rand.nextInt(26) + 'a');
+        String name = "test" + randomString + randomString;
+        String symptoms = "fever and " + randomString + randomString;
+        String email = "testUser" + randomString + randomString + "@gmail.com";
+        Thread.sleep(2999);
+        withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.xpath(xpathExpression));
+        getDriver().findElement(By.xpath(xpathExpression)).click();
+        Thread.sleep(2999);
+        driverDashboard.sendValueByPlaceHolder("Search here..." , symptom);
+        String symptomXpath = "//li[contains(text(),'"+symptom+"')]";
+        withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.xpath(symptomXpath));
+        getDriver().findElement(By.xpath(symptomXpath)).click();
+        waitForPageLoaded();
+        getDriver().findElement(By.xpath("//button[text()='Write']")).click();
+        tellUsSymptoms.sendKeys(symptoms);
+        getDriver().findElement(By.xpath(xpathExpression2)).click();
+        waitForPageLoaded();
+        getDriver().findElement(By.xpath(xpathExpression)).click();
+        waitForPageLoaded();
+        getDriver().findElement(By.xpath(xpathExpression)).click();
+        waitForPageLoaded();
+        getDriver().findElement(By.xpath("(//input[@name='email'])[6]")).sendKeys(email);
+        waitForPageLoaded();
+        getDriver().findElement(By.xpath(xpathExpression2)).click();
+        String xpath1 = "//a[text()='"+buttonText2+"']";
+        Thread.sleep(4999);
+        getDriver().findElement(By.xpath(xpath1)).click();
+        }
+
         public String getSuccessMessage()throws InterruptedException{
-//        waitForPageLoaded();
         withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.className("Toastify__toast-body"));
         JavascriptExecutor js=(JavascriptExecutor) getDriver();
         String str=(String)js.executeScript("return document.getElementsByClassName('Toastify__toast--success')[0].innerText");
@@ -403,5 +438,29 @@ public class HomePage extends ExtendedPageObject {
         String xpathExpression = "(//div[text()='"+error+"'])[2]";
         String errMsg = getDriver().findElement(By.xpath(xpathExpression)).getText();
         return errMsg;
+    }
+
+    public void clickOnNextButton(String section) throws InterruptedException{
+        waitForPageLoaded();
+        if(section.equals("You Are Suffering From?")){
+            firstNextButton.click();
+        }
+        else if(section.equals("From How Long You Have Been Suffering From This?")){
+            secondNextButton.click();
+        }
+
+        else if(section.equals("Enter Your Details So That Our Doctors Can Reach You With A Solution")){
+            thirdNextButton.click();
+        }
+    }
+
+    public void enterSymptom(String symptom) throws InterruptedException{
+        waitForPageLoaded();
+        driverDashboard.sendValueByPlaceHolder("Fever, Allergy, Skin Issues, Headache" , symptom);
+    }
+
+    public void selectTimePeriod() throws InterruptedException{
+        waitForPageLoaded();
+        lessThanOneMonthBtn.click();
     }
 }

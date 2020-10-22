@@ -39,3 +39,20 @@ Feature: Homeopathy Page
       | Postal Address                                   | Mohali                                 |
     Then User click on next button
 
+  Scenario: You Are Suffering From on homeopathy page - Field Validation
+    And User is on "You Are Suffering From?" section
+    And user click on next button in "You Are Suffering From?" section
+    Then Verify that error message "Symptom is required" displayed
+    And user enter symptom "fever"
+    And user click on next button in "You Are Suffering From?" section
+    And user click on next button in "From How Long You Have Been Suffering From This?" section
+    Then Verify that error message "Please select an option" displayed
+    And user select time period
+    And user click on next button in "From How Long You Have Been Suffering From This?" section
+    And user click on next button in "Enter Your Details So That Our Doctors Can Reach You With A Solution" section
+    Then Verify that error message "Name is required" displayed
+    Then Verify that error message "Phone Number is required" displayed
+    Then Verify that error message "Email is required" displayed
+    Then Verify that error message "Postal Address is required" displayed
+
+

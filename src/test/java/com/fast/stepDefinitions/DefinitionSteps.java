@@ -26,9 +26,9 @@ public class DefinitionSteps {
 		steps.select_a_symptom_from_dropdown();
 	}
 
-	@Then("^Fill the questionnaire as following$")
-	public void fill_the_questionnaire_as_following(DataTable arg1) throws Throwable{
-		steps.fill_the_questionnaire_as_following(arg1);
+	@Then("^Fill the questionnaire as following for \"([^\"]*)\" button flow$")
+	public void fill_the_questionnaire_as_following_for_button_flow(String arg1, DataTable arg2) throws Throwable {
+		steps.fill_the_questionnaire_as_following_for_button_flow(arg1,arg2);
 	}
 
 	@Then("^Verify that success message \"([^\"]*)\" displayed$")
@@ -151,6 +151,22 @@ public class DefinitionSteps {
 	public void user_click_on_link_in_section_on_homeopathy_page(String arg1, String arg2) throws Throwable{
 		steps.user_click_on_link_in_section_on_homeopathy_page(arg1,arg2);
 	}
+
+    @Given("^user click on next button in \"([^\"]*)\" section$")
+    public void user_click_on_next_button_in_section(String arg1) throws Throwable{
+	    steps.user_click_on_next_button_in_section(arg1);
+    }
+
+    @Then("^user enter symptom \"([^\"]*)\"$")
+    public void user_enter_symptom(String arg1) throws Throwable {
+	    steps.user_enter_symptom(arg1);
+    }
+
+    @Then("^user select time period$")
+    public void user_select_time_period() throws Throwable {
+	    steps.user_select_time_period();
+    }
+
 
 
 

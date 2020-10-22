@@ -36,13 +36,22 @@ public class EndUserSteps {
 	}
 
 	@Step
-	public void fill_the_questionnaire_as_following(DataTable arg1) throws Throwable{
-		List<List<String>> data = arg1.raw();
-		String btn="Yes";
-		String btn1="Next";
-		String btn2="Ok";
-		String symptom = data.get(3).get(1);
-		homePage.fillTheQuestionnaire(btn,btn1,btn2,symptom);
+	public void fill_the_questionnaire_as_following_for_button_flow(String arg1, DataTable arg2)throws Throwable {
+		List<List<String>> data = arg2.raw();
+		if(arg1.equals("Yes")){
+			String btn1="Next";
+			String btn2="Ok";
+			String symptom = data.get(3).get(1);
+			String btn = data.get(0).get(1);
+			homePage.fillTheQuestionnaireForYesButton(btn,btn1,btn2,symptom);
+		}
+		else if(arg1.equals("No")){
+			String btn1="Next";
+			String btn2="Ok";
+			String symptom = data.get(1).get(1);
+			String btn = data.get(0).get(1);
+			homePage.fillTheQuestionnaireForNoButton(btn,btn1,btn2,symptom);
+		}
 	}
 
 	@Step
@@ -236,6 +245,24 @@ public class EndUserSteps {
 	public void user_click_on_link_in_section_on_homeopathy_page(String arg1, String arg2) throws Throwable{
 		homeopathyPage.clickOnGivenButton(arg1,arg2);
 	}
+
+	@Step
+	public void user_click_on_next_button_in_section(String arg1) throws Throwable{
+		homePage.clickOnNextButton(arg1);
+	}
+
+	@Step
+	public void user_enter_symptom(String arg1) throws Throwable {
+		homePage.enterSymptom(arg1);
+	}
+
+	@Step
+	public void user_select_time_period() throws Throwable {
+		homePage.selectTimePeriod();
+	}
+
+
+
 
 
 
