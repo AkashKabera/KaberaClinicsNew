@@ -45,16 +45,15 @@ Feature: Guidelines Page
      Then Verify that "payment" page displayed
 
   Scenario: Verify that blog page is displayed after clicking on Read Now button in Why do you need a health checkup? section
-    Then Verify that after clicking on "Read Now" button in "Why do you need a health checkup?" navigates to blog page
+    Then Verify that after clicking on "Read Now" button in "Why do you need a health check-up?" navigates to blog page
 
-  Scenario: Verify that blog page is displayed after clicking on Read Now button in What should an online health check do for you? section
-    Then Verify that after clicking on "Read Now" button in "What should an online health check do for you?" navigates to blog page
+  Scenario: Verify that blog page is displayed after clicking on Read Now button in What should an online health check-up do for you? section
+    Then Verify that after clicking on "Read Now" button in "What should an online health check-up do for you?" navigates to blog page
 
-  Scenario: Verify that blog page is displayed after clicking on Read Now button in Why us for a health care? section
-    Then Verify that after clicking on "Read Now" button in "Why us for a health care?" navigates to blog page
+  Scenario: Verify that blog page is displayed after clicking on Read Now button in Why Kabera Clinics for health care? section
+    Then Verify that after clicking on "Read Now" button in "Why Kabera Clinics for health care?" navigates to blog page
 
-  Scenario: Verify that blog page is displayed after clicking on Read Now button in Purpose of online health consultation? section
-    Then Verify that after clicking on "Read Now" button in "Purpose of online health consultation?" navigates to blog page
-
+  Scenario: Verify that blog page is displayed after clicking on Read Now button in What is the purpose of online health care? section
+    Then Verify that after clicking on "Read Now" button in "What is the purpose of online health care?" navigates to blog page
 
     

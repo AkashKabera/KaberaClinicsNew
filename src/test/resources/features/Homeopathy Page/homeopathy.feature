@@ -29,7 +29,7 @@ Feature: Homeopathy Page
     Then Verify that "consult" page displayed
 
   Scenario: Verify that You Are Suffering From? section is working on homeopathy page
-    And User is on "You are suffering form?" section
+    And User is on "You Are Suffering From?" section
     Then User fill the You Are Suffering From form as following
       | Symptom                                          | Fever                                  |
       | From How Long You Have Been Suffering From This? | Less than 1 month                      |

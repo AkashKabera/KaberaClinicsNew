@@ -43,6 +43,7 @@ public class DriverDashboard extends ExtendedPageObject {
             returnTheVisibleOne(By.xpath(xpathExpression)).click();
         }
 
+
         else {
             js.executeScript("arguments[0].scrollIntoView();", element);
             returnTheVisibleOne(By.xpath(xpathExpression)).click();

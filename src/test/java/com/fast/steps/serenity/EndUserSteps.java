@@ -19,6 +19,8 @@ public class EndUserSteps {
 	ExtendedPageObject extendedPageObject;
 	GuidelinesPage guidelinesPage;
 	HomeopathyPage homeopathyPage;
+	ConsultPage consultPage;
+	PaymentPage paymentPage;
 
 	@Step
 	public void user_is_on_home_page() throws Throwable{
@@ -147,25 +149,25 @@ public class EndUserSteps {
 			String blogName = "5 Ways to Live Like Lord Buddha in the Corona Age";
 			Assert.assertEquals(blogName, homePage.getBlogHead(blogName));
 		}
-		else if (arg2.equals("Why do you need a health checkup?")) {
+		else if (arg2.equals("Why do you need a health check-up?")) {
 			guidelinesPage.clickOnReadNowLink(arg2);
 			Assert.assertEquals("https://blog.kaberaclinics.com/why-do-you-need-a-health-check-up/", extendedPageObject.getURL());
 			String blogName = "Why Do You Need a Health Check-Up?";
 			Assert.assertEquals(blogName,guidelinesPage.getBlogHead(blogName));
 		}
-		else if (arg2.equals("What should an online health check do for you?")) {
+		else if (arg2.equals("What should an online health check-up do for you?")) {
 			guidelinesPage.clickOnReadNowLink(arg2);
 			Assert.assertEquals("https://blog.kaberaclinics.com/what-should-an-online-health-check-up-do-for-you/", extendedPageObject.getURL());
 			String blogName = "What should an Online Health check-up do for you?";
 			Assert.assertEquals(blogName,guidelinesPage.getBlogHead(blogName));
 		}
-		else if (arg2.equals("Why us for a health care?")) {
+		else if (arg2.equals("Why Kabera Clinics for health care?")) {
 			guidelinesPage.clickOnReadNowLink(arg2);
 			Assert.assertEquals("https://blog.kaberaclinics.com/why-kabera-clinics-for-health-care/", extendedPageObject.getURL());
 			String blogName = "Why Kabera Clinics for health care?";
 			Assert.assertEquals(blogName,guidelinesPage.getBlogHead(blogName));
 		}
-		else if (arg2.equals("Purpose of online health consultation?")) {
+		else if (arg2.equals("What is the purpose of online health care?")) {
 			guidelinesPage.clickOnReadNowLink(arg2);
 			Assert.assertEquals("https://blog.kaberaclinics.com/what-is-the-purpose-of-online-health-care/", extendedPageObject.getURL());
 			String blogName = "What is the purpose of Online Health Care?";
@@ -238,7 +240,15 @@ public class EndUserSteps {
 
 	@Step
 	public void verify_that_user_is_on_page(String arg1) throws Throwable{
-		Assert.assertEquals(arg1,homeopathyPage.getPageHead(arg1));
+		if(arg1.contains("Homeopathy") || arg1.contains("Guideline")){
+			Assert.assertEquals(arg1,homeopathyPage.getPageHead(arg1));
+		}
+		else if(arg1.contains("Consult")){
+			Assert.assertTrue(consultPage.getPageHead(arg1).contains(arg1));
+		}
+		else if(arg1.contains("Payment")){
+			Assert.assertEquals(true,paymentPage.isPaymentPageDisplayed());
+		}
 	}
 
 	@Step
@@ -260,6 +270,60 @@ public class EndUserSteps {
 	public void user_select_time_period() throws Throwable {
 		homePage.selectTimePeriod();
 	}
+
+	@Step
+	public void verify_that_user_is_on_form(String arg1) throws Throwable{
+		Assert.assertTrue(consultPage.getFormTitle(arg1).contains(arg1));
+	}
+
+	@Step
+	public void user_Click_on_button_in_form_on_consult_page(String arg1, String arg2) throws Throwable{
+		consultPage.clickOnNextButton(arg1,arg2);
+	}
+
+	@Step
+	public void verify_that_error_message_displayed_on_consult_page(String arg1) throws Throwable {
+		Assert.assertEquals(arg1,consultPage.getErrorMessage(arg1));
+	}
+
+	@Step
+	public void user_fill_Consult_with_a_doctor_form_as_following(DataTable arg1) throws Throwable {
+		List<List<String>> data = arg1.raw();
+		String problem =data.get(0).get(1);
+		System.out.println("Symptom is ========" + problem);
+		consultPage.enterSymptomAndPhoneNumber(problem);
+	}
+
+	@Step
+	public void user_enter_an_invalid_OTP() throws Throwable {
+		consultPage.enterInvalidOTP();
+	}
+
+	@Step
+	public void Verify_that_OTP_field_is_reset() throws Throwable {
+		Assert.assertEquals(null,consultPage.getOTPFieldValue());
+	}
+
+	@Step
+	public void user_click_on_link_on_consult_page(String arg1) throws Throwable{
+		consultPage.clickOnLink(arg1);
+	}
+
+	@Step
+	public void user_enter_symptom_and_click_on_Add_button() throws Throwable{
+		consultPage.enterSymptomAndClickOnAddButton();
+	}
+
+	@Step
+	public void verify_that_symptom_is_added_in_the_list() throws Throwable{
+		Assert.assertEquals(true,consultPage.isSymptomAddedInList());
+	}
+
+
+
+
+
+
 
 
 

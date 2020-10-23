@@ -28,16 +28,16 @@ public class GuidelinesPage extends ExtendedPageObject{
         Thread.sleep(1999);
         js.executeScript("window.scrollBy(0,-500)");
         int index = 0;
-        if (section.equals("Why do you need a health checkup?")){
+        if (section.equals("Why do you need a health check-up?")){
             index = 0;
         }
-        else if (section.equals("Why us for a health care?")){
+        else if (section.equals("Why Kabera Clinics for health care?")){
             index = 1;
         }
-        else if (section.equals("What should an online health check do for you?")){
+        else if (section.equals("What should an online health check-up do for you?")){
             index = 2;
         }
-        else if (section.equals("Purpose of online health consultation?")){
+        else if (section.equals("What is the purpose of online health care?")){
             index = 3;
         }
         try {

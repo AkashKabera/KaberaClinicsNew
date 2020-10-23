@@ -52,16 +52,19 @@ Feature: Landing Page
     Given user is on home page
     And user click on "BOOK AN ONLINE HOMEOPATHIC DOCTOR CONSULTATION" link
     Then Verify that "consult" page displayed
+    And Verify that user is on "Consult" page
 
   Scenario:  Verify that Buy Now link is working
     Given user is on home page
     And user click on "Buy Now" link
     Then Verify that "payment" page displayed
+    Then Verify that user is on "Payment" page
 
   Scenario:  Verify that Consult link is working
     Given user is on home page
     And user click on "Consult" link
     Then Verify that "consult" page displayed
+    And Verify that user is on "Consult" page
 
   Scenario: Verify that Explore Now link is working in how homeopathy works section
     Given user is on home page
@@ -73,6 +76,7 @@ Feature: Landing Page
     Given user is on home page
     And user click on "Personalized Consultation" head link
     Then Verify that "consult" page displayed
+    And Verify that user is on "Consult" page
 
   Scenario: Verify that Talk To Our Doctors link is working
     Given user is on home page
@@ -119,12 +123,14 @@ Feature: Landing Page
     And User is on "India’s Best Doctors Are Online" section
     And User Click on "Get Consultation" button
     Then Verify that "consult" page displayed
+    And Verify that user is on "Consult" page
 
   Scenario: Verify that Get Consultation button is working in Get Medicine Delivered section
     Given user is on home page
     And User is on "Get Medicine Delivered " section
     And User Click on "Get Consultation" button
     Then Verify that "consult" page displayed
+    And Verify that user is on "Consult" page
 
   Scenario: Verify that You Are Suffering From? section is working
     Given user is on home page
@@ -171,29 +177,33 @@ Feature: Landing Page
     And User is on "Read Our Top Articles" section
     Then Verify that after clicking on "READ MORE" button in "5 Ways To Live Like Lord Buddha In The Corona Age" navigates to blog page
 
-  Scenario: Verify that user is able to book consultation form Book Now button in Skip the Travel section
-    Given user is on home page
-    And User is on "Skip the Travel" section
-    Then User Click on "BOOK NOW" button
-    Then Verify that "consult" page displayed
+#  Scenario: Verify that user is able to book consultation form Book Now button in Skip the Travel section
+#    Given user is on home page
+#    And User is on "Skip the Travel" section
+#    Then User Click on "BOOK NOW" button
+#    Then Verify that "consult" page displayed
+#    And Verify that user is on "Consult" page
 
   Scenario: Verify that user is able to book consultation from Get unlimited consultation section
     Given user is on home page
     And User is on "Get Unlimited Consultation" section
     And user click on "Limited Period Offer" link in "Get Unlimited Consultation" section
     Then Verify that "consult" page displayed
+    And Verify that user is on "Consult" page
 
   Scenario: Verify that user is able to use coupons from Get 20% OFF On Monthly Packages section
     Given user is on home page
     And User is on "Get 20% OFF On Monthly Packages" section
     And user click on "Limited Period Offer" link in "Get 20% OFF On Monthly Packages" section
     Then Verify that "payment" page displayed
+    Then Verify that user is on "Payment" page
 
-  Scenario: Verify that user is able to book consultation from Benefits of Online Consultation section
-    Given user is on home page
-    And User is on "Benefits of Online Consultation" section
-    And User Click on "CONSULT NOW" button
-    Then Verify that "consult" page displayed
+#  Scenario: Verify that user is able to book consultation from Benefits of Online Consultation section
+#    Given user is on home page
+#    And User is on "Benefits of Online Consultation" section
+#    And User Click on "CONSULT NOW" button
+#    Then Verify that "consult" page displayed
+#    And Verify that user is on "Consult" page
 
     ## Categories section
 

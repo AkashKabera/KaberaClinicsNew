@@ -167,6 +167,55 @@ public class DefinitionSteps {
 	    steps.user_select_time_period();
     }
 
+    @Given("^Verify that user is on \"([^\"]*)\" form$")
+    public void verify_that_user_is_on_form(String arg1) throws Throwable{
+		steps.verify_that_user_is_on_form(arg1);
+    }
+
+    @Given("^User Click on \"([^\"]*)\" button in \"([^\"]*)\" form on consult page$")
+    public void user_Click_on_button_in_form_on_consult_page(String arg1, String arg2) throws Throwable{
+		steps.user_Click_on_button_in_form_on_consult_page(arg1,arg2);
+    }
+
+    @Then("^Verify that error message \"([^\"]*)\" displayed on consult page$")
+    public void verify_that_error_message_displayed_on_consult_page(String arg1) throws Throwable {
+		steps.verify_that_error_message_displayed_on_consult_page(arg1);
+    }
+
+	@Then("^User fill Consult with a doctor form as following$")
+	public void user_fill_Consult_with_a_doctor_form_as_following(DataTable arg1) throws Throwable {
+		steps.user_fill_Consult_with_a_doctor_form_as_following(arg1);
+	}
+
+	@Then("^User enter an invalid OTP$")
+	public void user_enter_an_invalid_OTP() throws Throwable {
+		steps.user_enter_an_invalid_OTP();
+	}
+
+	@Then("^Verify that OTP field is reset$")
+	public void Verify_that_OTP_field_is_reset() throws Throwable {
+		steps.Verify_that_OTP_field_is_reset();
+	}
+
+	@Given("^user click on \"([^\"]*)\" link on consult page$")
+	public void user_click_on_link_on_consult_page(String arg1) throws Throwable{
+		steps.user_click_on_link_on_consult_page(arg1);
+	}
+
+	@Then("^user enter symptom and click on Add button$")
+	public void user_enter_symptom_and_click_on_Add_button() throws Throwable{
+		steps.user_enter_symptom_and_click_on_Add_button();
+	}
+
+	@Then("^Verify that symptom is added in the list$")
+	public void verify_that_symptom_is_added_in_the_list() throws Throwable{
+		steps.verify_that_symptom_is_added_in_the_list();
+	}
+
+
+
+
+
 
 
 
