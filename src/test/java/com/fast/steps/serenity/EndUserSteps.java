@@ -21,6 +21,7 @@ public class EndUserSteps {
 	HomeopathyPage homeopathyPage;
 	ConsultPage consultPage;
 	PaymentPage paymentPage;
+	PillarPage pillarPage;
 
 	@Step
 	public void user_is_on_home_page() throws Throwable{
@@ -318,6 +319,39 @@ public class EndUserSteps {
 	public void verify_that_symptom_is_added_in_the_list() throws Throwable{
 		Assert.assertEquals(true,consultPage.isSymptomAddedInList());
 	}
+
+	@Step
+	public void user_click_on_category_link_on_guideline_page(String arg1) throws Throwable{
+		guidelinesPage.clickOnCategory(arg1);
+	}
+
+	@Step
+	public void user_click_on_category_link_on_homeopathy_page(String arg1) throws Throwable{
+		homeopathyPage.clickOnCategory(arg1);
+	}
+
+	@Step
+	public void user_click_on_TOC_link_on_page(String arg1) throws Throwable{
+		pillarPage.clickOnTOCLink(arg1);
+	}
+
+	@Step
+	public void verify_that_section_is_displayed(String arg1)throws Throwable {
+		Assert.assertEquals(true,pillarPage.getSectionHead(arg1).contains(arg1.toUpperCase()));
+	}
+
+	@Step
+	public void verify_that_TOC_link_is_active(String arg1)throws Throwable {
+		Assert.assertEquals(true,pillarPage.isTOCLinkActive(arg1));
+	}
+
+	@Step
+	public void user_click_on_Talk_to_Doc_button_in_image() throws Throwable{
+		pillarPage.clickOnTalkToDocImage();
+	}
+
+
+
 
 
 

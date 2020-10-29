@@ -66,11 +66,11 @@ Feature: Landing Page
     Then Verify that "consult" page displayed
     And Verify that user is on "Consult" page
 
-  Scenario: Verify that Explore Now link is working in how homeopathy works section
-    Given user is on home page
-    And user click on "EXPLORE NOW" link in "how homeopathy works" section
-    Then Verify that "how-homeopathy-works" page displayed
-    And Verify that user is on "How Homeopathy Works" page
+#  Scenario: Verify that Explore Now link is working in how homeopathy works section
+#    Given user is on home page
+#    And user click on "EXPLORE NOW" link in "how homeopathy works" section
+#    Then Verify that "how-homeopathy-works" page displayed
+#    And Verify that user is on "How Homeopathy Works" page
 
   Scenario: Verify that Personalized Consultation link is working
     Given user is on home page

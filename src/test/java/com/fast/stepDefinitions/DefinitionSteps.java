@@ -212,6 +212,38 @@ public class DefinitionSteps {
 		steps.verify_that_symptom_is_added_in_the_list();
 	}
 
+    @Given("^User click on \"([^\"]*)\" category link on guideline page$")
+    public void user_click_on_category_link_on_guideline_page(String arg1)throws Throwable {
+	    steps.user_click_on_category_link_on_guideline_page(arg1);
+    }
+
+    @Given("^User click on \"([^\"]*)\" category link on homeopathy page$")
+    public void user_click_on_category_link_on_homeopathy_page(String arg1)throws Throwable {
+	    steps.user_click_on_category_link_on_homeopathy_page(arg1);
+    }
+
+	@Given("^User click on TOC link \"([^\"]*)\" on page$")
+	public void user_click_on_TOC_link_on_page(String arg1) throws Throwable{
+		steps.user_click_on_TOC_link_on_page(arg1);
+	}
+
+	@Then("^Verify that \"([^\"]*)\" section is displayed$")
+	public void verify_that_section_is_displayed(String arg1)throws Throwable {
+		steps.verify_that_section_is_displayed(arg1);
+	}
+
+	@Then("^Verify that TOC link \"([^\"]*)\" is active$")
+	public void verify_that_TOC_link_is_active(String arg1)throws Throwable {
+		steps.verify_that_TOC_link_is_active(arg1);
+	}
+
+	@Given("^User click on Talk to Doc button in image$")
+	public void user_click_on_Talk_to_Doc_button_in_image() throws Throwable{
+		steps.user_click_on_Talk_to_Doc_button_in_image();
+	}
+
+
+
 
 
 

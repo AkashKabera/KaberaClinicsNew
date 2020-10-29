@@ -56,4 +56,42 @@ Feature: Guidelines Page
   Scenario: Verify that blog page is displayed after clicking on Read Now button in What is the purpose of online health care? section
     Then Verify that after clicking on "Read Now" button in "What is the purpose of online health care?" navigates to blog page
 
-    
+  Scenario: Verify that Arthritis Treatment Category link is working on guideline page
+    And User click on "Arthritis Treatment" category link on guideline page
+    Then Verify that "Arthritis Treatment" pillar page displayed
+
+  Scenario: Verify that Diabetes Treatment Category link is working on guideline page
+    And User click on "Diabetes Treatment" category link on guideline page
+    Then Verify that "Diabetes Treatment" pillar page displayed
+
+  Scenario: Verify that Hair Treatment Category link is working on guideline page
+    And User click on "Hair Treatment" category link on guideline page
+    Then Verify that "Hair Problems Solutions" pillar page displayed
+
+  Scenario: Verify that Immune booster Category link is working on guideline page
+    And User click on "Immune booster" category link on guideline page
+    Then Verify that "Immune System" pillar page displayed
+
+  Scenario: Verify that Migraine Treatment Category link is working on guideline page
+    And User click on "Migraine Treatment" category link on guideline page
+    Then Verify that "Migraine Headache" pillar page displayed
+
+  Scenario: Verify that Skin Treatment Category link is working on guideline page
+    And User click on "Skin Treatment" category link on guideline page
+    Then Verify that "Skin Diseases" pillar page displayed
+
+  Scenario: Verify that Blood Pressure Category link is working on guideline page
+    And User click on "Blood Pressure" category link on guideline page
+    Then Verify that "Blood Pressure" pillar page displayed
+
+  Scenario: Verify that Child Care Category link is working on guideline page
+    And User click on "Child Care" category link on guideline page
+    Then Verify that "Child Health" pillar page displayed
+
+  Scenario: Verify that Mental Disorders Category link is working on guideline page
+    And User click on "Mental Disorders" category link on guideline page
+    Then Verify that "Mental Disorder" pillar page displayed
+
+  Scenario: Verify that Women Problem Category link is working on guideline page
+    And User click on "PCOS(Women Problem)" category link on guideline page
+    Then Verify that "Women's Health" pillar page displayed

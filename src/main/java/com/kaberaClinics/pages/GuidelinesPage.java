@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class GuidelinesPage extends ExtendedPageObject{
 
@@ -41,14 +43,13 @@ public class GuidelinesPage extends ExtendedPageObject{
             index = 3;
         }
         try {
-            getDriver().findElement(By.linkText("Read Now")).click();
+            getDriver().findElements(By.linkText("Read Now")).get(+index).click();
+            Thread.sleep(2999);
         } catch (Exception e) {
             JavascriptExecutor executor = (JavascriptExecutor) getDriver();
             executor.executeScript("arguments[0].click();", getDriver().findElements(By.linkText("Read Now")).get(+index));
+            Thread.sleep(2999);
         }
-
-//        Actions act =  new Actions(getDriver());
-//        act.moveToElement(getDriver().findElements(By.linkText("Read Now")).get(+index)).click().perform();
     }
 
     public String getBlogHead(String blogName) throws InterruptedException{
@@ -56,5 +57,37 @@ public class GuidelinesPage extends ExtendedPageObject{
         String xpathExpression = "(//a[text()='"+blogName+"'])[4]";
        String head =  getDriver().findElement(By.xpath(xpathExpression)).getText();
        return head;
+    }
+
+    @FindBy(xpath = "//button[@class='slick-arrow slick-next']")
+    WebElement nextButton;
+    @FindBy(xpath = "//h4[text()='People usually look for']")
+    WebElement categorySection;
+
+    public void clickOnCategory(String categoryName) throws InterruptedException{
+        waitForPageLoaded();
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        js.executeScript("arguments[0].scrollIntoView();", categorySection);
+//        String xpathExpression = "//h6[text()='"+categoryName+"']";
+        Thread.sleep(999);
+        nextButton.click();
+        if (categoryName.equals("Immune booster") || categoryName.equals("Migraine Treatment") || categoryName.equals("Skin Treatment")){
+            String xpathExpression = "(//h6[text()='"+categoryName+"'])[1]";
+            WebDriverWait wait = new WebDriverWait(getDriver(), 120);
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpathExpression)));
+            getDriver().findElement(By.xpath(xpathExpression)).click();
+        }
+//        else if(categoryName.equals("Blood Pressure")) {
+//            String xpathExpression = "(//h6[text()='"+categoryName+"'])[3]";
+//            WebDriverWait wait = new WebDriverWait(getDriver(), 120);
+//            wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpathExpression)));
+//            getDriver().findElement(By.xpath(xpathExpression)).click();
+//        }
+        else  {
+            String xpathExpression = "(//h6[text()='"+categoryName+"'])[2]";
+            WebDriverWait wait = new WebDriverWait(getDriver(), 120);
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpathExpression)));
+            getDriver().findElement(By.xpath(xpathExpression)).click();
+        }
     }
 }

@@ -122,9 +122,17 @@ public class HomePage extends ExtendedPageObject {
         public String getSuccessMessage()throws InterruptedException{
         withTimeoutOf(15, TimeUnit.SECONDS).waitForPresenceOf(By.className("Toastify__toast-body"));
         JavascriptExecutor js=(JavascriptExecutor) getDriver();
-        String str=(String)js.executeScript("return document.getElementsByClassName('Toastify__toast--success')[0].innerText");
-        System.out.println("message is "+str);
-        return str;
+        try{
+            String str=(String)js.executeScript("return document.getElementsByClassName('Toastify__toast--success')[0].innerText");
+            System.out.println("message is "+str);
+            return str;
+        }
+        catch (Exception e){
+            System.out.println("Exception  is == " +e);
+            String str=(String)js.executeScript("return document.getElementsByClassName('Toastify__toast--success')[0].innerText");
+            System.out.println("message is "+str);
+            return str;
+        }
         }
 
         @FindBy(xpath = "//input[@placeholder='Enter Phone Number' and @name='phoneNumber']")
